@@ -52,30 +52,5 @@ app.py             - Streamlit real-time dashboard
 fraud_model.pkl    - trained XGBoost model
 ```
 
-## How to run locally
-```bash
-pip install pandas numpy scikit-learn xgboost shap faker streamlit joblib
-python generate_data.py    # generate dataset
-python train_model.py      # train + evaluate models
-python explain_model.py    # SHAP explanations
-streamlit run app.py       # launch dashboard
-```
 
-## How to deploy (free)
-1. Push this folder to a public GitHub repo
-2. Go to [share.streamlit.io](https://share.streamlit.io), connect the repo,
-   set `app.py` as the entry point → get a live public URL
-3. Add the live link to your resume/LinkedIn — this matters more than the repo alone
 
-## Possible extensions (good "future work" talking points in interviews)
-- Replace synthetic data with the Kaggle Credit Card Fraud dataset for a real-data benchmark
-- Add a graph-based model (NetworkX/PyG) to catch money-mule *rings*, not just individual accounts
-- Wrap the model in a FastAPI endpoint for <100ms real-time scoring, add Docker + CI/CD
-- Add drift monitoring (Evidently AI) to detect when fraud patterns shift over time
-- A/B the supervised XGBoost against the unsupervised Isolation Forest to catch *novel* fraud patterns the labeled data doesn't cover
-
-## Interview talking points
-- "Why XGBoost over Random Forest?" → better PR-AUC, handles imbalance via `scale_pos_weight` without synthetic oversampling noise
-- "Why not just use accuracy?" → explain accuracy paradox on imbalanced data
-- "How would this work in real-time?" → sub-100ms scoring via FastAPI, feature computation from a streaming feature store (Redis) in production
-- "How is this auditable?" → SHAP gives per-decision explanations required for RBI compliance, unlike black-box deep learning scores
